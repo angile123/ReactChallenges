@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-export default function App() {
+export default function WikiSearch() {
   const [history, setHistory] = useState([]);
   const list = history.map((history) => (
     <li>
