@@ -1,4 +1,9 @@
 import { useState, useRef } from "react";
+import {
+  setHistoryIncomplete,
+  setHistoryFull,
+  setFirstQuery,
+} from "./WikiUtils.js";
 export default function WikiSearch() {
   const [history, setHistory] = useState([]);
   const list = history.map((history) => (
@@ -34,49 +39,4 @@ export default function WikiSearch() {
       {list.length >= 1 && <ul>{list}</ul>}
     </div>
   );
-}
-
-function indexOfTerm(history, input) {
-  return history.findIndex((query) => query.term == input);
-}
-function newHistoryList(index, history) {
-  const historyCopy = [...history];
-  historyCopy.splice(index, 1);
-  return historyCopy;
-}
-function setHistoryIncomplete(input, history, setHistory) {
-  const indexFound = indexOfTerm(history, input);
-  const newSearchTerm = {
-    term: input,
-    timestamp: new Date().toLocaleString(),
-  };
-
-  if (indexFound == -1) {
-    setHistory([newSearchTerm, ...history]);
-  } else {
-    const historyCopy = newHistoryList(indexFound, history);
-    setHistory([newSearchTerm, ...historyCopy]);
-  }
-}
-function setHistoryFull(input, history, setHistory) {
-  const indexFound = indexOfTerm(history, input);
-  const newSearchTerm = {
-    term: input,
-    timestamp: new Date().toLocaleString(),
-  };
-  if (indexFound >= 0) {
-    const historyCopy = newHistoryList(indexFound, history);
-    setHistory([newSearchTerm, ...historyCopy]);
-    return;
-  }
-  const historyCopy = [...history];
-  historyCopy.pop();
-  setHistory([newSearchTerm, ...historyCopy]);
-}
-function setFirstQuery(setHistory, input) {
-  const newSearchTerm = {
-    term: input,
-    timestamp: new Date().toLocaleString(),
-  };
-  setHistory([newSearchTerm]);
 }
