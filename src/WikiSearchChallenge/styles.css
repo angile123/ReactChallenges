@@ -38,6 +38,7 @@ input {
   width: 80%;
   display: grid;
   gap: 0.45rem;
+  max-width: 750px;
 }
 
 /* Query Component Styles */
