@@ -8,6 +8,7 @@ import {
 import Query from "./Components/Query.js";
 import NoQuery from "./Components/NoQuery.js";
 import "./styles.css";
+import History from "./Components/History.js";
 
 export default function WikiSearch() {
   const [history, setHistory] = useState([]);
@@ -58,7 +59,7 @@ export default function WikiSearch() {
       ) : (
         <NoQuery />
       )}
-      {!!list.length && <ol className="query-history-list">{list}</ol>}
+      {!!list.length && <History history={list} />}
     </div>
   );
 }

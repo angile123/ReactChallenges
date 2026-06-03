@@ -56,3 +56,11 @@ input {
 .query-item {
   margin-left: 2rem;
 }
+
+.history-container {
+  display: grid;
+  gap: 0.75rem;
+}
+.history-title-container {
+  border-bottom: 2px solid black;
+}
