@@ -42,3 +42,26 @@ export function setFirstQuery(setHistory, input) {
   };
   setHistory([newSearchTerm]);
 }
+export async function fetchData(term, setData, setLoading, setError) {
+  const URL = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${term}&format=json&origin=*&limit=5`;
+  setLoading(true);
+  try {
+    const res = await fetch(URL);
+    if (!res.ok) throw new Error("HTTP error");
+    const json = await res.json();
+    const termsFound = json[1];
+    const termLinks = json[3];
+    const data = [];
+    for (let i = 0; i < termsFound.length; i++) {
+      data.push({ term: termsFound[i], link: termLinks[i] });
+    }
+
+    setData(data);
+    setError(null);
+  } catch (error) {
+    setError(error.message);
+    setData(null);
+  } finally {
+    setLoading(null);
+  }
+}
