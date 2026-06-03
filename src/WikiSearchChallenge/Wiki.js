@@ -4,7 +4,10 @@ import {
   setHistoryFull,
   setFirstQuery,
 } from "./WikiUtils.js";
+import Query from "./Components/Query.js";
+import NoQuery from "./Components/NoQuery.js";
 import "./styles.css";
+
 export default function WikiSearch() {
   const [history, setHistory] = useState([]);
   const list = history.map((history) => (
@@ -39,21 +42,4 @@ export default function WikiSearch() {
       {!!list.length && <ol className="query-history-list">{list}</ol>}
     </div>
   );
-}
-
-function Query({ term = null }) {
-  return (
-    <div className="query-container">
-      <p className="query-search-term-p">You searched {term}</p>
-
-      <ul className="query-search-list">
-        <li className="query-item">1</li>
-        <li className="query-item">2</li>
-        <li className="query-item">3</li>
-      </ul>
-    </div>
-  );
-}
-function NoQuery() {
-  return <p className="query-search-term-p no-query-p">Search something...</p>;
 }
