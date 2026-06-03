@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Manrope", sans-serif;
+  font-size: 1rem;
+}
+form {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  margin: 0 auto;
+  width: 60%;
+  gap: 0.2rem;
+}
+button,
+input {
+  font-size: 0.65rem;
+  border-radius: 0.3rem;
+}
+input {
+  padding: 0.25rem 0.75rem;
+}
+button {
+  cursor: pointer;
+  background-color: oklch(48.8% 0.243 264.376);
+  border: none;
+  color: oklch(97% 0.014 254.604);
+  font-weight: 600;
+}
+input {
+  border: 2px solid oklch(20.5% 0 0);
+  color: oklch(20.5% 0 0);
+}
+.wiki-container {
+  margin: 0 auto;
+  margin-top: 0.75rem;
+  width: 80%;
+  display: grid;
+  gap: 0.45rem;
+  border: 2px solid red;
+}
+
+/* Query Component Styles */
+.query-container {
+  display: grid;
+  gap: 0.45rem;
+}
+.query-search-term-p {
+  text-align: center;
+}
+.query-search-list {
+  display: grid;
+  gap: 0.45rem;
+}
+.query-item {
+  margin-left: 2rem;
+}
