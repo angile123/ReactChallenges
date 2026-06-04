@@ -1,4 +1,4 @@
-export default function Query({ term, queries }) {
+export function Query({ term, queries }) {
   return (
     <div className="query-container">
       <p className="query-search-term-p">You searched {term}</p>

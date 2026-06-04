@@ -42,9 +42,9 @@ export function setFirstQuery(setHistory, input) {
   };
   setHistory([newSearchTerm]);
 }
-export async function fetchData(term, setData, setLoading, setError) {
+export async function fetchData(term, setApiState) {
   const URL = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${term}&format=json&origin=*&limit=5`;
-  setLoading(true);
+  setApiState({ data: null, loading: true, error: null });
   try {
     const res = await fetch(URL);
     if (!res.ok) throw new Error("HTTP error");
@@ -56,12 +56,41 @@ export async function fetchData(term, setData, setLoading, setError) {
       data.push({ term: termsFound[i], link: termLinks[i] });
     }
 
-    setData(data);
-    setError(null);
-  } catch (error) {
-    setError(error.message);
-    setData(null);
-  } finally {
-    setLoading(null);
+    setApiState({ data, loading: null, error: null });
+  } catch (err) {
+    setApiState({ data: null, loading: null, error: err.message });
   }
+}
+export function createHistoryList(history) {
+  return history.map((history) => (
+    <li className="query-item">
+      {history.term} - {history.timestamp}
+    </li>
+  ));
+}
+export function createSearchList(data) {
+  if (!data) return;
+  return data.map((query) => (
+    <li className="query-item">
+      <a target="_blank" rel="noopener noreferrer" href={query.link}>
+        {query.term}
+      </a>
+    </li>
+  ));
+}
+export function handleFormSubmission(e, props) {
+  e.preventDefault();
+  const { inputRef, setApiState, setHistory, history } = props;
+
+  const input = inputRef.current.value;
+  inputRef.current.value = "";
+
+  fetchData(input, setApiState);
+
+  if (history.length < 5) {
+    return history.length == 0
+      ? setFirstQuery(setHistory, input)
+      : setHistoryIncomplete(input, history, setHistory);
+  }
+  setHistoryFull(input, history, setHistory);
 }

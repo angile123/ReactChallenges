@@ -1,4 +1,4 @@
-export default function History({ history }) {
+export function History({ history }) {
   return (
     <div className="history-container">
       <div className="history-title-container">
