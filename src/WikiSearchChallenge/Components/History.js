@@ -1,11 +1,8 @@
-export function History({ history }) {
-  return (
-    <div className="history-container">
-      <div className="history-title-container">
-        <p className="history-title-p">History</p>
-      </div>
+import { createHistoryList } from "../WikiUtils";
+import { NoHistoryList, HistoryList } from "./index.js";
 
-      <ol>{history}</ol>
-    </div>
-  );
+export function HistorySection({ history }) {
+  const historyList = createHistoryList(history);
+  if (!historyList) return <NoHistoryList />;
+  if (historyList) return <HistoryList {...{ historyList }} />;
 }

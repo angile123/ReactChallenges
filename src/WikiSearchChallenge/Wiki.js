@@ -1,10 +1,5 @@
-import { useState, useRef } from "react";
-import {
-  createHistoryList,
-  createSearchList,
-  handleFormSubmission,
-} from "./WikiUtils.js";
-import { Query, NoQuery, History } from "./Components/index.js";
+import { useState } from "react";
+import { QuerySection, HistorySection, Form } from "./Components/index.js";
 import "./styles.css";
 
 export default function WikiSearch() {
@@ -15,28 +10,13 @@ export default function WikiSearch() {
     loading: null,
   });
 
-  const historyExist = !!history.length;
-  const { term } = historyExist && history[0];
-  const historyList = createHistoryList(history);
-  const hrefList = createSearchList(apiState.data);
-  const inputRef = useRef(null);
-  const formHandlerArgs = {
-    setApiState,
-    inputRef,
-    history,
-    setHistory,
-  };
+  const formHandlerArgs = { setApiState, history, setHistory };
 
   return (
     <div className="wiki-container">
-      <form onSubmit={(e) => handleFormSubmission(e, formHandlerArgs)}>
-        <input type="text" name={"text"} ref={inputRef} />
-        <button>Submit</button>
-      </form>
-
-      {!historyExist && <NoQuery />}
-      {historyExist && <Query term={term} queries={hrefList} />}
-      {historyExist && <History history={historyList} />}
+      <Form {...{ formHandlerArgs }} />
+      <QuerySection {...{ apiState }} />
+      <HistorySection {...{ history }} />
     </div>
   );
 }
