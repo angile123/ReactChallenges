@@ -49,11 +49,12 @@ export async function fetchData(term, setApiState) {
     const res = await fetch(URL);
     if (!res.ok) throw new Error("HTTP error");
     const json = await res.json();
+    const term = json[0];
     const termsFound = json[1];
     const termLinks = json[3];
     const data = [];
     for (let i = 0; i < termsFound.length; i++) {
-      data.push({ term: termsFound[i], link: termLinks[i] });
+      data.push({ term: termsFound[i], link: termLinks[i], query: term });
     }
 
     setApiState({ data, loading: null, error: null });
@@ -62,6 +63,8 @@ export async function fetchData(term, setApiState) {
   }
 }
 export function createHistoryList(history) {
+  if (history.length == 0) return null;
+
   return history.map((history) => (
     <li className="query-item">
       {history.term} - {history.timestamp}
@@ -70,13 +73,15 @@ export function createHistoryList(history) {
 }
 export function createSearchList(data) {
   if (!data) return;
-  return data.map((query) => (
+  const linkList = data.map((query) => (
     <li className="query-item">
       <a target="_blank" rel="noopener noreferrer" href={query.link}>
         {query.term}
       </a>
     </li>
   ));
+  const term = data[0].query;
+  return { linkList, term };
 }
 export function handleFormSubmission(e, props) {
   e.preventDefault();
