@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+button {
+  border-radius: 0.25rem;
+  cursor: pointer;
+  border: none;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.833rem;
+  color: oklch(98.5% 0 0);
+}
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.45rem;
+}
+.timer-display {
+  font-size: 2.986rem;
+  font-weight: 600;
+}
+.start-btn {
+  background-color: oklch(62.7% 0.194 149.214);
+  border: 2px solid oklch(62.7% 0.194 149.214);
+}
+.start-btn:hover {
+  background-color: oklch(72.3% 0.219 149.579);
+  border: 2px solid oklch(72.3% 0.219 149.579);
+}
+.stop-btn {
+  background-color: oklch(57.7% 0.245 27.325);
+}
+.stop-btn:hover {
+  background-color: oklch(63.7% 0.237 25.331);
+}
+.pause-btn {
+  border: 2px solid oklch(70.9% 0.01 56.259);
+  color: oklch(14.5% 0 0);
+}
