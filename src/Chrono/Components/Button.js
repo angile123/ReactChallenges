@@ -6,7 +6,7 @@ export function StopBtn({ intervalRef, setTime, setBtnStart }) {
       className="stop-btn"
       onClick={() => handleStopTimer(intervalRef, setTime, setBtnStart)}
     >
-      stop
+      X
     </button>
   );
 }
